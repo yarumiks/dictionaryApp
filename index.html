@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet" type='text/css' />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <link rel="stylesheet" href="main.css">
+    <title>Dictionary App</title>
+</head>
+
+<body class="theme--default theme--Poppins">
+
+    <header class="header">
+        <div class="settings">
+            <span class="logo">
+                <a href="#">
+                    <i class="fa-solid fa-book"></i>
+                </a>
+            </span>
+            <div class="select">
+                <select id="font-family" data-font-theme>
+                    <option value="Roboto">Roboto</option>
+                    <option value="Open Sans">Open Sans</option>
+                    <option value="Poppins">Poppins</option>
+                </select>
+                <div class="down-logo">
+                     <i class="fa-solid fa-chevron-down"></i> 
+                </div>
+            </div>
+
+            <div class="line"></div>
+            <div id="dark-mode">
+                <i class="ball">
+                </i>
+                <span class="material-symbols-outlined">
+                    dark_mode
+                </span>
+            </div>
+        </div>
+
+        <div class="search">
+            <input type="text" placeholder="enter a word" id="search-input">
+            <button type="button" id="search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main" data-state aria-busy="false">
+        <section class="wanted-word">
+            <div class="word-head">
+                <h1 data-keyword>kelime</h1>
+                <p data-pronunciation>telafuz</p>
+            </div>
+            <button data-play id="play">
+                <figure class="word-audio">
+                    <audio data-audio id="audio" controls src="Sertab Erener - Olsun.mp3">
+                        <a href="api">
+                            Download audio
+                        </a>
+                    </audio>
+                </figure>
+                <i class="fa-solid fa-play"></i>
+            </button>
+        </section>
+
+     <section class="error"></section>
+
+        <section data-explanation class="explanation">
+            <h2 class="sentenceO">naun</h2>
+            <h3 class="s-mean">meaning</h3>
+            <ul class="meaning-list">
+                <li>
+                    <p>A wheeled vehicle that moves independently, with at least three wheels, powered mechanically,
+                        steered by a driver and mostly for personal transportation.</p>
+                    <p class="example">She drove her car to the mall.</p>
+                </li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+<script src="./js/app.js" type="module"></script>
+</html>
+
