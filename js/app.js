@@ -109,7 +109,7 @@ function fillExplanation(data) {
             headerWord.innerHTML = html;
     
         for (const mean of head.meanings) {
-            console.log(mean)
+
             let exp1 = "";
             exp1 +=
                 `
