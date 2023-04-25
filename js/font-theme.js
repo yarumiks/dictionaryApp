@@ -1,5 +1,7 @@
 
-const fontSelect = document.querySelector("[data-font-theme]")
+ const fontSelect = document.querySelector("[data-font-theme]")
+ export default fontSelect;
+
 
 function SetFont(theme) {
     if (theme === "Poppins") {

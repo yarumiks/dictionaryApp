@@ -4,7 +4,9 @@ import dictionarySearch from "./dictionary-api.js";
 
 const searchBtn = document.getElementById("search-button")
 const searchInput = document.getElementById("search-input")
+const  play = document.getElementById('play')
 const audio = document.getElementById('audio')
+
 searchBtn.addEventListener('click', () => searchedWord())
 
 function searchedWord(keyword) {
@@ -32,11 +34,6 @@ window.addEventListener("hashchange", (event) => {
 
 searchInput.addEventListener("keydown", (event) => event.key === "Enter" && searchedWord())
 
-play.addEventListener('click', () => {
-    audio.play()
-})
-
-
 function search(term) {
     setDataState("busy");
     const keyword = term || searchInput.value;
@@ -45,7 +42,7 @@ function search(term) {
             setDataState("error");
         } else {
             setDataState("keyword");
-            fillKeyword(result[0]);
+            // fillKeyword(result[0]);
             fillExplanation(result);
             searchInput.value = "";
         }
@@ -61,97 +58,58 @@ function setDataState(state) {
     }
 }
 
-
-function fillKeyword(data) {
-    const titleWordEl = document.querySelector("[data-keyword]")
-    titleWordEl.innerText = data.word;
-
-    const pronunciationEl = document.querySelector("[data-pronunciation]")
-    pronunciationEl.innerText = data.phonetics || "";
-
-    let audioData = data.phonetics.find((e) => {
-        return e.audio
-    })
-
-    // const audioEl = document.querySelector("[data-audio]")
-    //      audioEl.setAttribute(audioData.audio)
-
-}
-
-
 function fillExplanation(data) {
-  
+        console.log(data[0].phonetics[0])
     const explanation = document.querySelector("[data-explanation]")
     const headerWord = document.querySelector(".wanted-word")
     explanation.innertext = "";
-
-    for (const head of data) {
-        console.log(head.phonetics[0].audio)
-        let html = "";
-        html += `
+    let html = "";
+    html += `
             <section class="wanted-word">
             <div class="word-head">
-            <h1 data-keyword>${head.word}</h1>
-            <p data-pronunciation>${head.phonetic}</p>
+            <h1 data-keyword>${data[0].word}</h1>
+            <p data-pronunciation>${data[0].phonetic}</p>
         </div>
-        <button data-play id="play">
-            <figure class="word-audio">
-                <audio data-audio id="audio" controls src="${head.phonetics[0].audio}">
-                    <a href="${head.phonetics.sourceUrl}">
+        <figure class="word-audio">
+                <audio data-audio id="audio" controls src="${data[0].phonetics[0].audio}">
+                    <a href="${data[0].phonetics[0].sourceUrl}">
                         Download audio
                     </a>
                 </audio>
             </figure>
-             <i class="fa-solid fa-play"></i>
-          </button>
+        <button type="button" title="title" id="play"><i class="fa-solid fa-play"></i></button>
         </section>
             `
-            headerWord.innerHTML = html;
-    
-        for (const mean of head.meanings) {
+    headerWord.innerHTML = html;
 
-            let exp1 = "";
-            exp1 +=
-                `
-                 <h2 class="sentenceO">${mean.partOfSpeech}</h2>
+    data[0].meanings.forEach(a => {
+        let exp1 = "";
+        exp1 +=
+            `
+                 <h2 class="sentenceO">${a.partOfSpeech}</h2>
                   <h3 class="s-mean">meaning</h3>
                  `
-            explanation.innerHTML = exp1;
+        explanation.insertAdjacentHTML('beforeEnd', exp1);
+
+        for (const b of a.definitions) {
+            let mean = "";
+
+            mean += `
+                         <ul class="meaning-list">
+                         <li>
+                             <p>${b.definition}</p>
+                             <p class="example">${b.example ? b.example : ''}</p>
+                         </li>
+                         </ul>
+                         `
+            explanation.insertAdjacentHTML('beforeEnd', mean);
         }
-    }
+    });
 }
 
 
-   
-// let exp = "";
-//                     exp += `
-//                      <ul class="meaning-list">
-//                          <li>
-//                             <p>${dfn.definition}</p>
-//                              <p class="example">${dfn.expamle ? dfn.example : 'no example'}</p>
-//                          </li>
-//                      </ul>
-    
-//                      `
-//                      console.log(dfn.example)
-//                      explanation.innerHTML = exp;
 
 
 
 
- // let exp = "";
-            //     exp += `
-            //      <h2 class="sentenceO">${main.partOfSpeech}</h2>
-            //      <h3 class="s-mean">meaning</h3>
-            //      <ul class="meaning-list">
-            //          <li>
-            //             <p>${main.definitions}</p>
-            //              <p class="example"></p>
-            //          </li>
-            //          <li>Lorem ipsum dolor sit amet.</li>
-            //          <li>Lorem ipsum dolor sit amet.</li>
-            //          <li>Lorem ipsum dolor sit amet.</li>
-            //          <li>Lorem ipsum dolor sit amet.</li>
-            //      </ul>
 
-            //      `
