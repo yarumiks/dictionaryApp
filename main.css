@@ -231,7 +231,7 @@ body.active{
     height: 80px;
     top: -1.5rem;
     border-radius: 50%;
-   background-color:  rgb(181, 179, 179);
+   background-color:  #e4771f;
    border: none;
    cursor: pointer;
 }
@@ -293,4 +293,7 @@ li+li{
 .example{
     color: #645c5c;
     margin-top: 0.5rem;
+}
+.visually-hidden{
+    visibility: hidden;
 }

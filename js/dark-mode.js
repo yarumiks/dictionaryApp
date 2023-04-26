@@ -3,8 +3,8 @@ const body = document.querySelector('body')
 const logo = document.querySelector('.logo i')
 const moon = document.querySelector('.material-symbols-outlined')
 const search = document.getElementById('search-button')
-const play = document.getElementById('play')
 import fontSelect from './font-theme.js';
+
 
 let click = 0
 function darkMode(){
@@ -20,7 +20,6 @@ function darkMode(){
     logo.style.color= "#e4771f";
     moon.style.color= "#e4771f";
      search.style.color= "#e4771f";
-     play.style.backgroundColor= "#e4771f";
      fontSelect.style.color = "#ffff";
      
 }
@@ -33,7 +32,6 @@ function lightMode(){
     logo.style.color= "";
     moon.style.color= "";
      search.style.color= "";
-     play.style.backgroundColor= "";
      fontSelect.style.color = "";
 }
 

@@ -4,8 +4,8 @@ import dictionarySearch from "./dictionary-api.js";
 
 const searchBtn = document.getElementById("search-button")
 const searchInput = document.getElementById("search-input")
-const  play = document.getElementById('play')
-const audio = document.getElementById('audio')
+
+
 
 searchBtn.addEventListener('click', () => searchedWord())
 
@@ -59,29 +59,36 @@ function setDataState(state) {
 }
 
 function fillExplanation(data) {
-        console.log(data[0].phonetics[0])
     const explanation = document.querySelector("[data-explanation]")
     const headerWord = document.querySelector(".wanted-word")
-    explanation.innertext = "";
+    explanation.innerHTML = "";
+    headerWord.innerHTML = "";
     let html = "";
     html += `
-            <section class="wanted-word">
+            
             <div class="word-head">
             <h1 data-keyword>${data[0].word}</h1>
             <p data-pronunciation>${data[0].phonetic}</p>
         </div>
         <figure class="word-audio">
-                <audio data-audio id="audio" controls src="${data[0].phonetics[0].audio}">
+                <audio data-audio id="audio" src="${data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio }">
                     <a href="${data[0].phonetics[0].sourceUrl}">
                         Download audio
                     </a>
                 </audio>
             </figure>
-        <button type="button" title="title" id="play"><i class="fa-solid fa-play"></i></button>
-        </section>
+        <button  type="button" aria-labelledby="audio"  class="button" id="play"><i class="fa-solid fa-play"></i></button>
             `
     headerWord.innerHTML = html;
 
+    // audio button event
+    const play = document.getElementById('play')
+    const audio = document.getElementById('audio')
+    play.addEventListener('click', ()=>{
+        audio.play();
+    })
+    //
+        
     data[0].meanings.forEach(a => {
         let exp1 = "";
         exp1 +=

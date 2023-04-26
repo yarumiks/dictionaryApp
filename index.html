@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         rel="stylesheet" type='text/css' />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="main.css">
     <title>Dictionary App</title>
 </head>
@@ -23,6 +21,7 @@
                     <i class="fa-solid fa-book"></i>
                 </a>
             </span>
+            <label class="visually-hidden" for="font-family" >Select Font Style</label>
             <div class="select">
                 <select id="font-family" data-font-theme>
                     <option value="Roboto">Roboto</option>
@@ -46,7 +45,7 @@
 
         <div class="search">
             <input type="text" placeholder="enter a word" id="search-input">
-            <button type="button" id="search-button">
+            <button  type="button" aria-labelledby="search-input" id="search-button">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
@@ -54,20 +53,18 @@
 
     <main class="main" data-state aria-busy="false">
         <section class="wanted-word">
-            <div class="word-head">
+            <!-- <div class="word-head">
                 <h1 data-keyword>kelime</h1>
                 <p data-pronunciation>telafuz</p>
             </div>
-            <button type="button" data-play id="play">
-                <figure class="word-audio">
-                    <audio data-audio controls id="audio"  >
-                        <a href="api">
-                            Download audio
-                        </a>
-                    </audio>
-                </figure>
-                <!-- <div><i class="fa-solid fa-play"></i></div> -->
-            </button>
+            <figure class="word-audio">
+                <audio data-audio id="audio" controls src=" ">
+                    <a href="">
+                        Download audio
+                    </a>
+                </audio>
+            </figure>
+        <button type="button" aria-labelledby="audio" id="play"><i class="fa-solid fa-play"></i></button> -->
         </section>
 
      <section class="error"></section>
