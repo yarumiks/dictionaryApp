@@ -51,6 +51,7 @@ body {
     height: 40px;
     padding-top: 5px;
     margin-right: 4rem;
+
 }
 
 .line {
@@ -106,6 +107,8 @@ select:focus{
                 inset 0 -4px 40px rgba(53, 53, 53, 0.1);
 }
 
+
+
 #dark-mode .ball {
     position: absolute;
     display: block;
@@ -150,8 +153,8 @@ body.active{
     background: linear-gradient(to bottom, #caba07e7, #e4771f); 
     left: 25px;
  }
-
-
+ 
+ 
 /* Dark theme end */
 
 
@@ -236,6 +239,15 @@ body.active{
    cursor: pointer;
 }
 
+#play:hover{
+    background-color:   #e67f2a;
+}
+
+#play:active{
+    background-color:  #ed832d;
+    outline: 4px solid #d76405;
+    outline-offset: -1mm;
+}
 #play i {
     position: absolute;
     top: 34%;
@@ -296,4 +308,68 @@ li+li{
 }
 .visually-hidden{
     visibility: hidden;
+}
+
+/* Responsive */
+@media screen and (max-width: 790px) {
+    .header{
+        height: 40vh;
+        margin-top: -4rem;
+    }
+    .settings{
+        display: flex;
+        position: relative;
+        min-width: 680px;
+        right: 10rem;
+        top: 2rem;
+    }
+    .search{
+        min-width: 680px;
+        position: relative;
+        right: 10rem;
+        top: 3.5rem;
+    }
+    .error-img{
+        min-width: 85%;
+    }
+}
+@media screen and (max-width: 550px) {
+    body{
+        overflow-x: hidden;
+    }
+    .settings{
+        display: flex;
+        min-width: 450px;
+        margin-left: 5rem;
+    }
+    
+    .search{
+       min-width: 480px;
+        position: relative;
+        margin-left: 4rem;
+    }
+    .error-img{
+        min-width: 100%;
+    }
+}
+
+/* ERROR PAGE */
+.error{  
+    padding: auto;
+    margin: auto;
+    width: 80%;
+}
+.error-img{
+    width: 80%;
+    height: 350px;
+    margin-top: -3rem;
+    padding-bottom: 25px;
+    margin-left: 2rem;
+}
+.error-text{
+    font-size: 1.01rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding-top: 0.5rem;
+    line-height: 2.2rem;
 }

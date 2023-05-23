@@ -35,21 +35,23 @@ window.addEventListener("hashchange", (event) => {
 searchInput.addEventListener("keydown", (event) => event.key === "Enter" && searchedWord())
 
 function search(term) {
-    setDataState("busy");
+
+    showDataState("busy");
     const keyword = term || searchInput.value;
     dictionarySearch(keyword).then((result) => {
         if (result.error) {
-            setDataState("error");
+            showDataState("error");
+            ErrorFn()
         } else {
-            setDataState("keyword");
+            showDataState("keyword");
             // fillKeyword(result[0]);
-            fillExplanation(result);
+            explanationFn(result);
             searchInput.value = "";
         }
     });
 }
 
-function setDataState(state) {
+function showDataState(state) {
     const dataState = document.querySelector("[data-state]")
     if (state) {
         dataState.setAttribute("data-state", state)
@@ -58,20 +60,41 @@ function setDataState(state) {
     }
 }
 
-function fillExplanation(data) {
+function ErrorFn(){
     const explanation = document.querySelector("[data-explanation]")
     const headerWord = document.querySelector(".wanted-word")
+    const errorPage = document.querySelector(".error")
+    errorPage.innerHTML = "";
+    explanation.innerHTML = "";
+    headerWord.innerHTML = "";
+    let html = "";
+
+    html += `
+    <div>
+        <img src="/build/png.png" class="error-img">
+    </div>
+    <p class="error-text">We couldn't find any results for the word you were looking for, search for another
+        word or try again later.</p>
+    `
+    errorPage.innerHTML = html;
+}
+
+function explanationFn(data) {
+    const explanation = document.querySelector("[data-explanation]")
+    const headerWord = document.querySelector(".wanted-word")
+    const errorPage = document.querySelector(".error")
+    errorPage.innerHTML = "";
     explanation.innerHTML = "";
     headerWord.innerHTML = "";
     let html = "";
     html += `
             
-            <div class="word-head">
+        <div class="word-head">
             <h1 data-keyword>${data[0].word}</h1>
-            <p data-pronunciation>${data[0].phonetic}</p>
+            <p data-pronunciation>${data[0].phonetic ? data[0].phonetic : 'pronunciation not found' }</p>
         </div>
-        <figure class="word-audio">
-                <audio data-audio id="audio" src="${data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio }">
+            <figure class="word-audio">
+                <audio data-audio id="audio" src="${data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio}">
                     <a href="${data[0].phonetics[0].sourceUrl}">
                         Download audio
                     </a>
@@ -84,11 +107,11 @@ function fillExplanation(data) {
     // audio button event
     const play = document.getElementById('play')
     const audio = document.getElementById('audio')
-    play.addEventListener('click', ()=>{
+    play.addEventListener('click', () => {
         audio.play();
     })
     //
-        
+
     data[0].meanings.forEach(a => {
         let exp1 = "";
         exp1 +=
